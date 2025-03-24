@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de prêt hypothécaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: orange;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color:#006F6A;
+        }
+        p {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+  <h2>Calculateur de prêt hypothécaire</h2>
+
+    <form id="loanForm">
+        <label for="montant">Montant du prêt (en €) :</label>
+        <input type="number" id="montant" name="montant" required min="1" placeholder="Montant du prêt">
+
+        <label for="taux">Taux d'intérêt annuel (%) :</label>
+        <input type="number" id="taux" name="taux" required min="0" placeholder="Taux d'intérêt annuel">
+
+        <label for="duree">Durée du prêt (en années) :</label>
+        <input type="number" id="duree" name="duree" required min="1" placeholder="Durée en années">
+
+        <button type="button" onclick="calculerPaiement()">Calculer</button>
+    </form>
+
+    <p id="resultat"></p>
+
+    <script>
+        // Fonction pour calculer le paiement mensuel
+        function calculerPaiement() {
+            // Récupération des valeurs saisies
+            const montant = parseFloat(document.getElementById("montant").value);
+            const tauxAnnuel = parseFloat(document.getElementById("taux").value);
+            const duree = parseInt(document.getElementById("duree").value);
+
+            // Validation des entrées
+            if (isNaN(montant) || montant <= 0) {
+                alert("Veuillez saisir un montant de prêt valide (supérieur à 0).");
+                return;
+            }
+            if (isNaN(tauxAnnuel) || tauxAnnuel < 0) {
+                alert("Veuillez saisir un taux d'intérêt valide.");
+                return;
+            }
+            if (isNaN(duree) || duree <= 0) {
+                alert("Veuillez saisir une durée valide en années.");
+                return;
+            }
+
+            // Calcul du paiement mensuel
+            const tauxMensuel = (tauxAnnuel / 100) / 12; // Taux mensuel
+            const n = duree * 12; // Nombre total de mois
+            const paiementMensuel = montant * (tauxMensuel * Math.pow(1 + tauxMensuel, n)) / (Math.pow(1 + tauxMensuel, n) - 1);
+
+            // Affichage du résultat
+            document.getElementById("resultat").textContent = "Le paiement mensuel est : " + paiementMensuel.toFixed(2) + " €";
+        }
+    </script>
+
+</body>
+</html>

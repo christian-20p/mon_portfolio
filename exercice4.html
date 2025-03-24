@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manipulation de Tableau</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h2>Manipulation de Tableau en JavaScript</h2>
+    
+    <h3>Tableau initial :</h3>
+    <table id="tableau">
+        <thead>
+            <tr>
+                <th>Éléments du Tableau</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Les éléments du tableau seront ajoutés ici -->
+        </tbody>
+    </table>
+
+    <h3>Opérations :</h3>
+    <button onclick="ajouterElement()">Ajouter un élément à la fin</button>
+    <button onclick="supprimerElement()">Supprimer un élément spécifique</button>
+    <button onclick="trierTableau()">Trier le tableau</button>
+
+    <script>
+        // Initialisation du tableau de nombres
+        let tableau = [5, 3, 8, 1, 9, 4];
+        
+        // Fonction pour afficher le tableau dans la table
+        function afficherTableau() {
+            const tbody = document.getElementById("tableau").getElementsByTagName('tbody')[0];
+            tbody.innerHTML = ''; // Vider le tableau avant de le remplir à nouveau
+            
+            // Remplir le tableau avec les valeurs du tableau
+            tableau.forEach(function(element) {
+                const tr = document.createElement('tr');
+                const td = document.createElement('td');
+                td.textContent = element;
+                tr.appendChild(td);
+                tbody.appendChild(tr);
+            });
+        }
+        
+        // Affichage initial du tableau
+        afficherTableau();
+
+        // Fonction pour ajouter un élément à la fin du tableau
+        function ajouterElement() {
+            let element = prompt("Entrez un nombre à ajouter à la fin du tableau :");
+            element = parseInt(element); // Convertir l'élément en nombre entier
+            if (!isNaN(element)) {tableau.push(element);
+                afficherTableau();
+            } else {
+                alert("Veuillez entrer un nombre valide.");
+            }
+        }
+
+        // Fonction pour supprimer un élément spécifique du tableau
+        function supprimerElement() {
+            let element = prompt("Entrez le nombre à supprimer du tableau :");
+            element = parseInt(element); // Convertir l'élément en nombre entier
+            const index = tableau.indexOf(element);
+            if (index !== -1) {
+                tableau.splice(index, 1); // Supprimer l'élément
+                afficherTableau();
+            } else {
+                alert("Cet élément n'existe pas dans le tableau.");
+            }
+        }
+
+        // Fonction pour trier le tableau dans l'ordre croissant
+        function trierTableau() {
+            tableau.sort(function(a, b) {
+                return a - b; // Trier les éléments dans l'ordre croissant
+            });
+            afficherTableau();
+        }
+    </script>
+</body>
+</html>

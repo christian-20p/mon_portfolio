@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Devinette de Nombre</title>
+    <link rel="stylesheet" href="jeux.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Jeu de Devinette de Nombre</h1>
+        <p>Devinez un nombre entre 1 et 100.</p>
+        
+        <input type="number" id="guess" placeholder="Entrez votre nombre">
+        <button id="submit-guess">Soumettre</button>
+        
+        <p id="feedback"></p>
+<p>Nombre de tentatives : <span id="attempts">0</span></p>
+        
+        <button id="restart-btn" style="display: none;">Recommencer</button>
+    </div>
+
+    <script src="jeux.js"></script>
+</body>
+</html>
+
